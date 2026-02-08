@@ -15,7 +15,6 @@ This project simulates a data engineering environment with multiple data sources
 
 ## Prerequisites
 
-
 - Docker 
   - Tutorial instalation: https://www.youtube.com/playlist?list=PLbPvnlmz6e_L_3Zw_fGtMcMY0eAOZnN-H
 
