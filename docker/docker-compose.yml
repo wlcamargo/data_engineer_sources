@@ -1,0 +1,140 @@
+services:
+  # PostgreSQL AdventureWorks
+  postgres_adventureworks:
+    hostname: postgres_adventureworks
+    container_name: postgres_adventureworks
+    image: wlcamargo/postgres-adventureworks
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5435:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - data-engineer-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # MongoDB
+  mongodb:
+    container_name: mongodb
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - data-engineer-network
+    restart: always
+
+  # Kafka
+  kafka:
+    image: obsidiandynamics/kafka
+    container_name: kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_LISTENERS: "INTERNAL://:29092,EXTERNAL://:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:29092,EXTERNAL://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT: "6000"
+      KAFKA_RESTART_ATTEMPTS: "10"
+      KAFKA_RESTART_DELAY: "5"
+      ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
+    networks:
+      - data-engineer-network
+
+  # Kafka UI
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "9007:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: "local"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:29092"
+      KAFKA_CLUSTERS_0_CONNECT_URL: "http://kafka-connect:8083"
+    depends_on:
+      - kafka
+    networks:
+      - data-engineer-network
+
+  # Neo4j
+  neo4j:
+    image: neo4j:3.5.26
+    container_name: neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/test
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - data-engineer-network
+      
+  # Elasticsearch
+  elasticsearch:
+    image: elasticsearch:7.17.23
+    container_name: elasticsearch
+    hostname: elasticsearch
+    restart: always
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - xpack.security.enabled=true 
+      - cluster.name=docker-cluster
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - TZ=America/Sao_Paulo
+    healthcheck:
+      test: curl -u elastic:${ELASTIC_PASSWORD} -f http://elasticsearch:9200/_cluster/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - data-engineer-network
+
+  # SQL Server
+  mssqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
+    hostname: mssqlserver
+    container_name: mssqlserver
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_PID: "Evaluation"
+    ports:
+      - 1435:1433
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - data-engineer-network
+
+volumes:
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  neo4j_data:
+    driver: local
+  elastic_data:
+    driver: local
+  mssql_data:
+    driver: local
+
+networks:
+  data-engineer-network:
+    driver: bridge
