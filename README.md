@@ -24,7 +24,7 @@ This project simulates a data engineering environment with multiple data sources
 ### Clone the Repository
 
 ```bash
-git clone wlcamargo/data_engineer_sources
+git clone https://github.com/wlcamargo/data_engineer_sources.git
 cd data_engineer_sources
 ```
 
