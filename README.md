@@ -18,6 +18,8 @@ This project simulates a data engineering environment with multiple data sources
 - Docker 
   - Tutorial instalation: https://www.youtube.com/playlist?list=PLbPvnlmz6e_L_3Zw_fGtMcMY0eAOZnN-H
 
+- Dbeaver
+- MongoDB Compass
 
 ## Quick Start
 
@@ -96,7 +98,7 @@ The AdventureWorks database comes pre-loaded with sample data.
 - [SQL Server Documentation](https://docs.microsoft.com/en-us/sql/)
 
 ## 🧑🏼‍🚀 Developer
-| Developer    | LinkedIn                                   | Email                        | Portfolio                              |
-|--------------------|--------------------------------------------|------------------------------|----------------------------------------|
 
-| Wallace Camargo    | [LinkedIn](https://www.linkedin.com/in/wallace-camargo-35b615171/) | wallacecpdg@gmail.com        | [Portfólio](https://wlcamargo.github.io/)   |
+| Developer | LinkedIn | Email | Portfolio |
+|-----------|----------|-------|-----------|
+| Wallace Camargo | [LinkedIn](https://www.linkedin.com/in/wallace-camargo-35b615171/) | wallacecpdg@gmail.com | [Portfólio](https://wlcamargo.github.io/) |
