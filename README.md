@@ -71,12 +71,11 @@ The AdventureWorks database comes pre-loaded with sample data.
 - **Username:** neo4j
 - **Password:** test
 
-### Elasticsearch
+### Kibana
 
-- **URL:** http://localhost:9200
+- **URL:** http://localhost:5601/
 - **Username:** elastic
 - **Password:** mudar@123
-- **Cluster:** docker-cluster
 
 ### Kafka
 
