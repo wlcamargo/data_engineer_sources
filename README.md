@@ -20,6 +20,12 @@ This project simulates a data engineering environment with multiple data sources
 
 - Dbeaver
 - MongoDB Compass
+- Git
+- Python
+
+## Video Tutorial
+
+https://www.youtube.com/watch?v=v1gMhd7q-W8
 
 ## Quick Start
 
@@ -85,6 +91,13 @@ The AdventureWorks database comes pre-loaded with sample data.
 - **Kafka UI:** http://localhost:9007
 - **KSQLDB:** http://localhost:8088
 
+
+
+## Extension: S3 Ingestion
+
+![S3 Ingestion](assets/s3_ingestion.png)
+
+Now, we will insert data into the sources using Python and then extract and load this data to S3, also using Python.
 
 
 ## References
