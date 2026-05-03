@@ -54,7 +54,7 @@ The AdventureWorks database comes pre-loaded with sample data.
 - **Host:** localhost
 - **Port:** 27017
 - **Username:** chapolin
-- **Password:** mudar123
+- **Password:** mudar@123
 - **Auth Database:** admin
 - **Connection String:** `mongodb://chapolin:mudar123@localhost:27017`
 
