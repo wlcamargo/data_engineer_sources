@@ -3,4 +3,9 @@ venv/
 __pycache__/
 *.pyc
 *.env
-
+*.bin
+*.bkp
+*.json
+\tmp
+docker/lake/minio-data/raw/local_file/devs.csv/xl.meta
+docker/lake/minio-data/raw/local_file/goals.xlsx/xl.meta
