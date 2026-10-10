@@ -1,0 +1,11 @@
+boto3
+docker
+elasticsearch>=7.17,<8
+kafka-python
+neo4j>=4.4,<5
+pandas
+psycopg2-binary
+pymongo
+pyodbc
+python-dotenv
+requests
