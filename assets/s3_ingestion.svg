@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="560" fill="#ffffff"/>
+
+  <text x="500" y="32" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">
+    S3 Ingestion Flow
+  </text>
+
+  <!-- Stage A: scripts/ -->
+  <rect x="20" y="220" width="170" height="100" rx="14" fill="#ffffff" stroke="#222" stroke-width="2"/>
+  <text x="105" y="258" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">scripts/</text>
+  <text x="105" y="280" text-anchor="middle" font-size="12" fill="#444">Python scripts that</text>
+  <text x="105" y="296" text-anchor="middle" font-size="12" fill="#444">insert fake/dummy data</text>
+
+  <!-- Stage B: Sources (6 boxes stacked) -->
+  <!-- box geometry: x=300 width=230 height=52, gap -->
+  <g font-size="13" fill="#222">
+    <rect x="300" y="40"  width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="62" text-anchor="middle" font-weight="bold">PostgreSQL</text>
+    <text x="415" y="80" text-anchor="middle" font-size="11" fill="#555">AdventureWorks (pre-seeded)</text>
+
+    <rect x="300" y="122" width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="153" text-anchor="middle" font-weight="bold">MongoDB</text>
+
+    <rect x="300" y="204" width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="235" text-anchor="middle" font-weight="bold">SQL Server</text>
+
+    <rect x="300" y="286" width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="317" text-anchor="middle" font-weight="bold">Elasticsearch</text>
+
+    <rect x="300" y="368" width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="399" text-anchor="middle" font-weight="bold">Neo4j</text>
+
+    <rect x="300" y="450" width="230" height="52" rx="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="415" y="481" text-anchor="middle" font-weight="bold">Kafka</text>
+  </g>
+
+  <!-- Stage C: src/ -->
+  <rect x="610" y="220" width="170" height="100" rx="14" fill="#ffffff" stroke="#222" stroke-width="2"/>
+  <text x="695" y="258" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">src/</text>
+  <text x="695" y="280" text-anchor="middle" font-size="12" fill="#444">Python ingestion scripts</text>
+  <text x="695" y="296" text-anchor="middle" font-size="12" fill="#444">(ingestion_from_*.py)</text>
+
+  <!-- Stage D: MinIO / S3 raw layer -->
+  <rect x="850" y="205" width="135" height="130" rx="14" fill="#ffffff" stroke="#222" stroke-width="2"/>
+  <text x="917" y="236" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">MinIO / S3</text>
+  <text x="917" y="258" text-anchor="middle" font-size="12" fill="#444">bucket: raw</text>
+  <text x="917" y="278" text-anchor="middle" font-size="11" fill="#555">raw/mongodb/</text>
+  <text x="917" y="294" text-anchor="middle" font-size="11" fill="#555">raw/sqlserver/</text>
+  <text x="917" y="310" text-anchor="middle" font-size="11" fill="#555">raw/neo4j/ ...</text>
+
+  <!-- Arrows: scripts/ -> each source -->
+  <g stroke="#333" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <path d="M 190 258 C 240 150, 260 90, 298 65"/>
+    <path d="M 190 268 C 230 200, 260 160, 298 148"/>
+    <path d="M 190 280 C 220 240, 250 235, 298 230"/>
+    <path d="M 190 292 C 220 300, 250 305, 298 312"/>
+    <path d="M 190 304 C 230 340, 260 375, 298 394"/>
+    <path d="M 190 312 C 240 400, 260 450, 298 476"/>
+  </g>
+  <text x="235" y="200" font-size="11" fill="#555" transform="rotate(0 235 200)">insert fake data</text>
+
+  <!-- Arrows: each source -> src/ -->
+  <g stroke="#333" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <path d="M 530 66  C 580 140, 590 180, 608 232"/>
+    <path d="M 530 148 C 570 180, 585 205, 608 250"/>
+    <path d="M 530 230 C 560 250, 580 258, 608 264"/>
+    <path d="M 530 312 C 560 300, 580 288, 608 278"/>
+    <path d="M 530 394 C 570 340, 585 305, 608 292"/>
+    <path d="M 530 476 C 580 400, 590 340, 608 306"/>
+  </g>
+  <text x="552" y="400" font-size="11" fill="#555">extract</text>
+
+  <!-- Arrow: src/ -> MinIO -->
+  <path d="M 780 270 L 846 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="813" y="260" text-anchor="middle" font-size="11" fill="#555">upload</text>
+
+  <text x="500" y="540" text-anchor="middle" font-size="12" fill="#666">
+    scripts/ seed the sources with dummy data  -&gt;  src/ reads from each source  -&gt;  uploads JSON to MinIO (S3), bucket "raw", one folder per source
+  </text>
+</svg>
