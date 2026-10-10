@@ -10,17 +10,26 @@ This project simulates a data engineering environment with multiple data sources
 - **MongoDB** - NoSQL Document Database
 
 
-## Architecture
+## Sorces / Tools
 ![image](assets/sources.png)
+
+## Worflow
+![S3 Ingestion](assets/s3_ingestion.svg)
+
+Now, we will insert data into the sources using Python and then extract and load this data to S3, also using Python.
 
 ## Prerequisites
 
 - Docker 
-  - Tutorial instalation: https://www.youtube.com/playlist?list=PLbPvnlmz6e_L_3Zw_fGtMcMY0eAOZnN-H
+
+- Tutorial Docker instalation: https://www.youtube.com/playlist?list=PLbPvnlmz6e_L_3Zw_fGtMcMY0eAOZnN-H
 
 - Dbeaver
+
 - MongoDB Compass
+
 - Git
+
 - Python
 
 ## Video Tutorial
@@ -93,11 +102,7 @@ The AdventureWorks database comes pre-loaded with sample data.
 
 
 
-## Extension: S3 Ingestion
 
-![S3 Ingestion](assets/s3_ingestion.png)
-
-Now, we will insert data into the sources using Python and then extract and load this data to S3, also using Python.
 
 
 ## References
